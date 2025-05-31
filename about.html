@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D.X | About Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+<!-- Include Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<header class="flex items-center justify-between p-4 shadow-md">
+  <h1 class="text-2xl font-bold tracking-wide text-blue-700 flex items-center gap-2">
+    <i data-lucide="shirt" class="w-5 h-5"></i> D.X
+  </h1>
+  <nav class="flex items-center gap-6 text-gray-700">
+    <a href="index.html" class="hover:text-red-600 flex items-center gap-1">
+      <i data-lucide="home" class="w-4 h-4"></i>
+      <span class="hidden sm:inline">Home</span>
+    </a>
+    <a href="shop.html" class="hover:text-red-600 flex items-center gap-1">
+      <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+      <span class="hidden sm:inline">Shop</span>
+    </a>
+    <a href="cart.html" class="hover:text-red-600 flex items-center gap-1">
+      <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+      <span class="hidden sm:inline">Cart</span>
+    </a>
+    <a href="about.html" class="text-blue-600 font-semibold flex items-center gap-1">
+      <i data-lucide="info" class="w-4 h-4"></i>
+      <span class="hidden sm:inline">About</span>
+    </a>
+  </nav>
+</header>
+
+<script>
+  lucide.createIcons();
+</script> 
+  <!-- About Section -->
+  <main class="flex-grow max-w-5xl mx-auto px-4 py-12">
+    <h2 class="text-4xl font-bold text-blue-800 mb-6">About D.X</h2>
+    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+      <span class="font-bold text-red-600">D.X</span> was born with one idea: to redefine everyday clothing.  
+      We are a team of young creators passionate about blending comfort, style, and streetwear —  
+      all at a price that makes sense.
+    </p>
+
+    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+      Our mission is simple — bring minimal yet bold fashion pieces that speak confidence.  
+      From tees to jackets, everything is designed to make you stand out.
+    </p>
+
+    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+      Proudly built in India 🇮🇳, for creators everywhere.
+    </p>
+
+    <div class="mt-10">
+      <a href="contact.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded transition">
+        Contact Us
+      </a>
+    </div>
+  </main> 
+  <section class="bg-white py-12 flex flex-col items-center space-y-6 max-w-md mx-auto rounded shadow-md">
+  <!-- Logo / Image -->
+  <img
+    src="images/qr.png"
+    alt="D.X Logo or QR Code"
+    class="w-48 h-48 object-contain rounded-lg border border-gray-300"
+  />
+
+  <!-- Optional Caption -->
+  <p class="text-center text-gray-700 text-lg px-4">
+    Scan the QR code to explore more about <span class="font-semibold text-blue-600">D.X Clothing</span>
+  </p>
+</section>
+  
+  <section class="bg-gradient-to-r from-gray-100 via-white to-gray-100 py-24 flex flex-col items-center justify-center px-6">
+  <!-- Large, elegant D.X logo text -->
+  <h1 class="text-[10rem] font-serif font-bold text-gray-900 tracking-widest select-none drop-shadow-lg">
+    D.<span class="text-blue-700">X</span>
+  </h1>
+
+  <!-- Subtle underline line -->
+  <div class="w-24 h-1 bg-blue-700 rounded mt-2 mb-6"></div>
+
+  <!-- Tagline / Description -->
+  <p class="max-w-3xl text-center text-gray-700 text-xl leading-relaxed font-light tracking-wide">
+    Elevate your style with <span class="font-semibold text-gray-900">D.X Clothing</span>. <br />
+    Premium fabrics. Modern designs. Crafted for those who value quality and elegance.
+  </p>
+</section> 
+
+  <!-- Footer --> 
+  <!-- Include Lucide Icons script once in your main HTML head or before closing body -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<footer class="bg-gray-900 text-white py-6">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <p class="text-sm">&copy; 2025 D.X Clothing. All rights reserved.</p>
+
+    <div class="flex space-x-6">
+      <a href="https://instagram.com/dx_clothing" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-pink-500">
+        <i data-lucide="instagram" class="w-6 h-6"></i>
+      </a>
+      <a href="https://facebook.com/dxclothing" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-600">
+        <i data-lucide="facebook" class="w-6 h-6"></i>
+      </a>
+      <a href="https://twitter.com/dx_clothing" target="_blank" rel="noopener" aria-label="Twitter" class="hover:text-blue-400">
+        <i data-lucide="twitter" class="w-6 h-6"></i>
+      </a>
+      <a href="https://youtube.com/dxclothing" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-red-600">
+        <i data-lucide="youtube" class="w-6 h-6"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+</script>
+
+</body>
+</html> 

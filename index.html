@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D.X | Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+<!-- Font Awesome CDN (for icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- Updated Header -->
+<!-- Include Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Left: Logo + Icon -->
+    <div class="flex items-center space-x-2">
+      <i data-lucide="shirt" class="text-blue-600 w-5 h-5"></i>
+      <h1 class="text-2xl font-bold text-gray-800">D.X</h1>
+    </div>
+
+    <!-- Right: Navigation -->
+    <nav class="flex items-center gap-6 text-gray-700">
+      <a href="index.html" class="text-blue-600 font-semibold flex items-center gap-1">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">Home</span>
+      </a>
+      <a href="shop.html" class="hover:text-blue-600 flex items-center gap-1">
+        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">Shop</span>
+      </a>
+      <a href="about.html" class="hover:text-blue-600 flex items-center gap-1">
+        <i data-lucide="info" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">About</span>
+      </a>
+      <a href="contact.html" class="hover:text-blue-600 flex items-center gap-1">
+        <i data-lucide="contact" class="w-4 h-4"></i>
+        <span class="hidden sm:inline">Contact</span>
+      </a>
+    </nav>
+
+    <!-- Cart Icon -->
+    <div class="relative ml-4">
+      <a href="cart.html" class="text-gray-700 text-xl hover:text-blue-600 flex items-center">
+        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+        <span id="cartCount" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1.5 rounded-full">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  lucide.createIcons();
+</script> 
+
+  <!-- Hero Section -->
+  <section class="bg-gray-50 text-center py-20 px-4">
+    <h2 class="text-5xl font-bold text-blue-800 mb-4">Wear the Difference</h2>
+    <p class="text-gray-600 text-lg mb-8">Explore global fashion trends with D.X Clothing</p>
+    <a href="shop.html" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-md transition">Shop Now</a>
+  </section>
+
+<section class="w-full min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4 py-12">
+  <div class="text-center max-w-xl w-full">
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8">Search Your Style</h2>
+
+    <!-- Search Box with Icon -->
+    <div class="relative backdrop-blur-lg bg-white/60 dark:bg-white/10 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg p-1.5 transition">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search for styles..." 
+        class="w-full rounded-full bg-transparent px-5 py-3 pl-12 text-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        oninput="filterResults()"
+      />
+      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-300 text-lg"></span>
+
+      <!-- Dropdown List -->
+      <ul id="resultsList" class="absolute left-0 right-0 mt-2 bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-600 rounded-xl shadow-xl z-10 text-left hidden max-h-60 overflow-y-auto backdrop-blur-md">
+        <!-- Results go here -->
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  const products = [
+    "Denim Jacket", "Summer T-shirt", "Unisex Hoodie", "Cotton Sweatshirt",
+    "Limited Edition DX", "Black Cargo Pants", "White Sneakers", "Graphic Tee",
+    "Oversized Shirt", "Classic Blue Jeans"
+  ];
+
+  const searchInput = document.getElementById("searchInput");
+  const resultsList = document.getElementById("resultsList");
+
+  let index = 0, charIndex = 0, currentText = '', isDeleting = false;
+  const textList = [...products];
+
+  function typeInInput() {
+    if (index >= textList.length) index = 0;
+    currentText = textList[index];
+
+    if (isDeleting) {
+      searchInput.setAttribute("placeholder", currentText.substring(0, charIndex--));
+    } else {
+      searchInput.setAttribute("placeholder", currentText.substring(0, charIndex++));
+    }
+
+    if (!isDeleting && charIndex === currentText.length) {
+      isDeleting = true;
+      setTimeout(typeInInput, 1500);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      index++;
+      setTimeout(typeInInput, 400);
+    } else {
+      setTimeout(typeInInput, isDeleting ? 40 : 90);
+    }
+  }
+
+  typeInInput();
+
+  function filterResults() {
+    const query = searchInput.value.toLowerCase();
+    resultsList.innerHTML = "";
+
+    if (query === "") {
+      resultsList.classList.add("hidden");
+      return;
+    }
+
+    const filtered = products.filter(product =>
+      product.toLowerCase().includes(query)
+    );
+
+    if (filtered.length === 0) {
+      resultsList.innerHTML = `<li class="px-5 py-3 text-gray-500 dark:text-gray-300">No results found</li>`;
+    } else {
+      filtered.forEach(product => {
+        const li = document.createElement("li");
+        li.className = "flex items-center justify-between px-5 py-3 hover:bg-blue-100 dark:hover:bg-gray-700 transition-all cursor-pointer rounded";
+        
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = product;
+        nameSpan.className = "text-gray-800 dark:text-white";
+
+        const addBtn = document.createElement("button");
+        addBtn.textContent = "Add to Cart";
+        addBtn.className = "bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-sm rounded transition";
+        addBtn.onclick = () => {
+          alert(`"${product}" added to cart!`);
+          resultsList.classList.add("hidden");
+          searchInput.value = "";
+        };
+
+        li.appendChild(nameSpan);
+        li.appendChild(addBtn);
+        resultsList.appendChild(li);
+      });
+    }
+
+    resultsList.classList.remove("hidden");
+  }
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest("#searchInput") && !event.target.closest("#resultsList")) {
+      resultsList.classList.add("hidden");
+    }
+  });
+</script>
+
+  <!-- Featured Categories -->
+  <section class="max-w-6xl mx-auto py-16 px-4">
+    <h3 class="text-3xl font-bold text-blue-800 mb-10 text-center">Featured Categories</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="images/man2.jpg" alt="Men" class="w-full h-60 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold text-gray-800">Men</h4>
+          <p class="text-gray-600 text-sm mb-3">Casuals, formals & more</p>
+          <a href="shop.html" class="text-blue-600 hover:underline">Shop Men →</a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="images/girl.jpg" alt="Women" class="w-full h-60 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold text-gray-800">Women</h4>
+          <p class="text-gray-600 text-sm mb-3">Trendy outfits & classics</p>
+          <a href="shop.html" class="text-blue-600 hover:underline">Shop Women →</a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="images/bags.jpg" alt="Accessories" class="w-full h-60 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold text-gray-800">Accessories</h4>
+          <p class="text-gray-600 text-sm mb-3">Bags, shoes & more</p>
+          <a href="shop.html" class="text-blue-600 hover:underline">Shop Accessories →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="bg-blue-50 py-16 px-4 text-center">
+    <h3 class="text-3xl font-bold text-blue-800 mb-4">Stay in the Loop</h3>
+    <p class="text-gray-600 mb-6">Get latest fashion drops and exclusive offers straight to your inbox.</p>
+    <form class="flex flex-col sm:flex-row justify-center items-center max-w-xl mx-auto space-y-4 sm:space-y-0 sm:space-x-4">
+      <input type="email" placeholder="Enter your email" class="w-full sm:w-auto px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-600">
+      <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md font-semibold transition">Subscribe</button>
+    </form>
+  </section> 
+  <!-- Include this in your homepage where you want the QR code generator -->
+
+<section class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Generate Your QR Code</h2>
+
+  <input
+    id="qrInput"
+    type="text"
+    placeholder="Enter text, link, or number"
+    class="w-full border border-gray-300 rounded px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
+  />
+
+  <button
+    id="generateBtn"
+    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition mb-4"
+  >
+    Generate QR Code
+  </button>
+
+  <div class="flex justify-center">
+    <canvas id="qrCanvas" class="border border-gray-300 rounded"></canvas>
+  </div>
+
+  <button
+    id="downloadBtn"
+    class="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition hidden"
+  >
+    Download QR Code
+  </button>
+</section>
+
+<!-- QR Code library from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+  const input = document.getElementById('qrInput');
+  const generateBtn = document.getElementById('generateBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const qrCanvas = document.getElementById('qrCanvas');
+
+  generateBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    if (!text) {
+      alert('Please enter some text to generate QR code!');
+      return;
+    }
+
+    QRCode.toCanvas(qrCanvas, text, { width: 200 }, (error) => {
+      if (error) {
+        alert('Error generating QR code!');
+        console.error(error);
+        return;
+      }
+      downloadBtn.style.display = 'block'; // show download button
+    });
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'qr-code.png';
+    link.href = qrCanvas.toDataURL('image/png');
+    link.click();
+  });
+</script>
+
+  <!-- Footer -->
+  <!-- Include Lucide Icons script once in your main HTML head or before closing body -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<footer class="bg-gray-900 text-white py-6">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <p class="text-sm">&copy; 2025 D.X Clothing. All rights reserved.</p>
+
+    <div class="flex space-x-6">
+      <a href="https://instagram.com/dx_clothing" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-pink-500">
+        <i data-lucide="instagram" class="w-6 h-6"></i>
+      </a>
+      <a href="https://facebook.com/dxclothing" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-blue-600">
+        <i data-lucide="facebook" class="w-6 h-6"></i>
+      </a>
+      <a href="https://twitter.com/dx_clothing" target="_blank" rel="noopener" aria-label="Twitter" class="hover:text-blue-400">
+        <i data-lucide="twitter" class="w-6 h-6"></i>
+      </a>
+      <a href="https://youtube.com/dxclothing" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-red-600">
+        <i data-lucide="youtube" class="w-6 h-6"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+</script>
+  <footer class="mt-auto bg-gray-100 py-6 text-center text-sm text-gray-600">
+    - D.X Clothing. Designed & Developed By Dishu Dalal.
+  </footer>
+
+</body>
+</html> 
